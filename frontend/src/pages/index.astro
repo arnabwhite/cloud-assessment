@@ -189,7 +189,7 @@ const zodiacs = [
 </style>
 
 <script>
-	const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3001';
+	const API_URL = import.meta.env.PUBLIC_API_URL !== undefined ? import.meta.env.PUBLIC_API_URL : 'http://localhost:3001';
 	
 	const form = document.getElementById('calculator-form');
 	const resultContainer = document.getElementById('result-container');

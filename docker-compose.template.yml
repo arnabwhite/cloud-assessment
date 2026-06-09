@@ -23,8 +23,6 @@ services:
       DB_NAME: lovematch
       DB_HOST: db
       PORT: 3001
-    ports:
-      - "3001:3001"
     depends_on:
       - db
     restart: unless-stopped
@@ -32,11 +30,19 @@ services:
   frontend:
     image: FRONTEND_IMAGE
     container_name: lovematch_frontend
-    environment:
-      PUBLIC_API_URL: http://localhost:3001
-    ports:
-      - "4321:4321"
     depends_on:
+      - backend
+    restart: unless-stopped
+
+  proxy:
+    image: nginx:alpine
+    container_name: lovematch_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
       - backend
     restart: unless-stopped
 

@@ -36,7 +36,7 @@ jobs:
 
       - name: Build and push frontend Docker image
         run: |
-          docker build -t ${{ steps.login-ecr.outputs.registry }}/lovematch-frontend:${{ github.sha }} ./frontend
+          docker build --build-arg PUBLIC_API_URL="" -t ${{ steps.login-ecr.outputs.registry }}/lovematch-frontend:${{ github.sha }} ./frontend
           docker push ${{ steps.login-ecr.outputs.registry }}/lovematch-frontend:${{ github.sha }}
 
       - name: Compile docker-compose.yml
@@ -47,7 +47,7 @@ jobs:
 
       - name: Generate Deployment Package
         run: |
-          zip -r deploy.zip docker-compose.yml
+          zip -r deploy.zip docker-compose.yml nginx.conf
           
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
