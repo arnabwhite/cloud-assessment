@@ -1,0 +1,311 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const zodiacs = [
+  'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
+  'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+];
+---
+
+<Layout>
+	<div class="max-w-4xl w-full mx-auto flex flex-col items-center">
+		
+		<!-- Main Elegant Card -->
+		<div class="w-full bg-white/80 backdrop-blur-md rounded-[2.5rem] p-8 md:p-14 shadow-[0_20px_60px_-15px_rgba(210,180,180,0.3)] border border-white flex flex-col items-center relative overflow-hidden transition-all duration-700 ease-in-out">
+			
+			<div class="text-center max-w-lg mb-12">
+				<h1 class="font-['Crimson_Pro'] text-5xl md:text-6xl font-light text-[#3A2D25] tracking-tight mb-4 italic">Celestial Harmony</h1>
+				<p class="text-[#8B7D74] text-sm md:text-base leading-relaxed">
+					Discover the subtle resonances between two souls. Enter the details below to unveil the alignment of the stars.
+				</p>
+			</div>
+
+			<form id="calculator-form" class="w-full relative z-10 flex flex-col">
+				
+				<div class="flex flex-col md:flex-row gap-12 md:gap-8 justify-between w-full mb-12">
+					<!-- Subject One -->
+					<div class="flex-1 flex flex-col gap-6">
+						<div class="flex items-center gap-4">
+							<div class="h-px bg-[#E8DBD3] flex-1"></div>
+							<h3 class="font-['Crimson_Pro'] text-lg italic text-[#A69992] tracking-wide">First Soul</h3>
+							<div class="h-px bg-[#E8DBD3] flex-1"></div>
+						</div>
+						
+						<div class="group">
+							<label for="name1" class="block text-xs uppercase tracking-widest text-[#BBAFAB] mb-2 pl-1">Name</label>
+							<input type="text" id="name1" name="name1" required
+								class="w-full px-4 py-3 bg-transparent border-b-2 border-[#E8DBD3] focus:border-[#D4B5A5] outline-none transition-colors text-[#4A3B32] text-lg placeholder:text-[#D9D0CB] font-light"
+								placeholder="Enter name" />
+						</div>
+						
+						<div>
+							<label class="block text-xs uppercase tracking-widest text-[#BBAFAB] mb-3 pl-1">Gender</label>
+							<div class="flex gap-6 pl-1">
+								<label class="flex items-center gap-2 cursor-pointer group">
+									<div class="relative flex items-center justify-center">
+										<input type="radio" name="gender1" value="Male" required class="peer appearance-none w-4 h-4 rounded-full border border-[#D4B5A5] checked:border-[#A87E6A] transition-colors cursor-pointer">
+										<div class="absolute w-2 h-2 rounded-full bg-[#A87E6A] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+									</div>
+									<span class="text-[15px] text-[#6A5A52] group-hover:text-[#4A3B32] transition-colors">Male</span>
+								</label>
+								<label class="flex items-center gap-2 cursor-pointer group">
+									<div class="relative flex items-center justify-center">
+										<input type="radio" name="gender1" value="Female" class="peer appearance-none w-4 h-4 rounded-full border border-[#D4B5A5] checked:border-[#A87E6A] transition-colors cursor-pointer">
+										<div class="absolute w-2 h-2 rounded-full bg-[#A87E6A] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+									</div>
+									<span class="text-[15px] text-[#6A5A52] group-hover:text-[#4A3B32] transition-colors">Female</span>
+								</label>
+							</div>
+						</div>
+
+						<div>
+							<label for="zodiac1" class="block text-xs uppercase tracking-widest text-[#BBAFAB] mb-2 pl-1">Sign</label>
+							<div class="relative">
+								<select id="zodiac1" name="zodiac1" required class="w-full px-4 py-3 bg-[#FCFBF9] border border-[#E8DBD3] rounded-xl focus:border-[#D4B5A5] focus:ring-4 focus:ring-[#D4B5A5]/10 outline-none transition-all appearance-none text-[#6A5A52] font-light text-lg cursor-pointer">
+									<option value="" disabled selected>Select sign</option>
+									{zodiacs.map(z => <option value={z}>{z}</option>)}
+								</select>
+								<!-- Custom elegant arrow -->
+								<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+									<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M1 1.5L6 6.5L11 1.5" stroke="#A69992" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Divider -->
+					<div class="hidden md:flex flex-col items-center justify-center px-4">
+						<div class="w-px h-24 bg-gradient-to-b from-transparent via-[#E8DBD3] to-transparent"></div>
+					</div>
+
+					<!-- Subject Two -->
+					<div class="flex-1 flex flex-col gap-6">
+						<div class="flex items-center gap-4">
+							<div class="h-px bg-[#E8DBD3] flex-1"></div>
+							<h3 class="font-['Crimson_Pro'] text-lg italic text-[#A69992] tracking-wide">Second Soul</h3>
+							<div class="h-px bg-[#E8DBD3] flex-1"></div>
+						</div>
+						
+						<div class="group">
+							<label for="name2" class="block text-xs uppercase tracking-widest text-[#BBAFAB] mb-2 pl-1">Name</label>
+							<input type="text" id="name2" name="name2" required
+								class="w-full px-4 py-3 bg-transparent border-b-2 border-[#E8DBD3] focus:border-[#D4B5A5] outline-none transition-colors text-[#4A3B32] text-lg placeholder:text-[#D9D0CB] font-light"
+								placeholder="Enter name" />
+						</div>
+						
+						<div>
+							<label class="block text-xs uppercase tracking-widest text-[#BBAFAB] mb-3 pl-1">Gender</label>
+							<div class="flex gap-6 pl-1">
+								<label class="flex items-center gap-2 cursor-pointer group">
+									<div class="relative flex items-center justify-center">
+										<input type="radio" name="gender2" value="Male" required class="peer appearance-none w-4 h-4 rounded-full border border-[#D4B5A5] checked:border-[#A87E6A] transition-colors cursor-pointer">
+										<div class="absolute w-2 h-2 rounded-full bg-[#A87E6A] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+									</div>
+									<span class="text-[15px] text-[#6A5A52] group-hover:text-[#4A3B32] transition-colors">Male</span>
+								</label>
+								<label class="flex items-center gap-2 cursor-pointer group">
+									<div class="relative flex items-center justify-center">
+										<input type="radio" name="gender2" value="Female" class="peer appearance-none w-4 h-4 rounded-full border border-[#D4B5A5] checked:border-[#A87E6A] transition-colors cursor-pointer">
+										<div class="absolute w-2 h-2 rounded-full bg-[#A87E6A] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+									</div>
+									<span class="text-[15px] text-[#6A5A52] group-hover:text-[#4A3B32] transition-colors">Female</span>
+								</label>
+							</div>
+						</div>
+
+						<div>
+							<label for="zodiac2" class="block text-xs uppercase tracking-widest text-[#BBAFAB] mb-2 pl-1">Sign</label>
+							<div class="relative">
+								<select id="zodiac2" name="zodiac2" required class="w-full px-4 py-3 bg-[#FCFBF9] border border-[#E8DBD3] rounded-xl focus:border-[#D4B5A5] focus:ring-4 focus:ring-[#D4B5A5]/10 outline-none transition-all appearance-none text-[#6A5A52] font-light text-lg cursor-pointer">
+									<option value="" disabled selected>Select sign</option>
+									{zodiacs.map(z => <option value={z}>{z}</option>)}
+								</select>
+								<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+									<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M1 1.5L6 6.5L11 1.5" stroke="#A69992" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex justify-center mt-2">
+					<button type="submit" 
+						class="group relative px-10 py-4 bg-[#8C6B5D] hover:bg-[#725549] text-[#FDFBF7] font-['Lora'] text-lg tracking-wide rounded-full shadow-[0_10px_30px_-10px_rgba(140,107,93,0.5)] transition-all duration-300 overflow-hidden">
+						<span class="relative z-10 flex items-center gap-3">
+							Unveil Destiny
+							<svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+						</span>
+					</button>
+				</div>
+			</form>
+
+			<!-- Result Reveal Section -->
+			<div id="result-container" class="hidden w-full flex-col items-center opacity-0 transition-opacity duration-1000 mt-16 pt-16 border-t border-[#E8DBD3]">
+				<span class="text-[11px] font-medium text-[#A87E6A] uppercase tracking-[0.3em] mb-4">Harmony Level</span>
+				
+				<div class="flex items-start gap-1 mb-6 relative">
+					<span id="result-percentage" class="font-['Crimson_Pro'] text-8xl md:text-[8rem] font-light text-[#4A3B32] leading-none tracking-tighter">0</span>
+					<span class="text-3xl text-[#A69992] font-light mt-2">%</span>
+				</div>
+				
+				<p id="result-message" class="text-[#6A5A52] text-xl md:text-2xl font-['Crimson_Pro'] italic text-center max-w-lg mb-4 leading-relaxed"></p>
+			</div>
+		</div>
+
+		<!-- History List (Minimalist) -->
+		<div class="w-full max-w-2xl mx-auto mt-16 px-4">
+			<div class="flex items-center gap-4 mb-8">
+				<div class="h-px bg-[#E8DBD3] flex-1"></div>
+				<h2 class="font-['Crimson_Pro'] text-xl italic text-[#8B7D74]">Past Readings</h2>
+				<div class="h-px bg-[#E8DBD3] flex-1"></div>
+			</div>
+			
+			<div id="history-container" class="space-y-4 max-h-[300px] overflow-y-auto pr-4 custom-scrollbar">
+				<p class="text-center text-[#BBAFAB] text-sm italic">Gathering celestial records...</p>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+/* Refined Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: #E8DBD3;
+	border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: #D4B5A5;
+}
+</style>
+
+<script>
+	const API_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3001';
+	
+	const form = document.getElementById('calculator-form');
+	const resultContainer = document.getElementById('result-container');
+	const resultPercentage = document.getElementById('result-percentage');
+	const resultMessage = document.getElementById('result-message');
+	const historyContainer = document.getElementById('history-container');
+
+	// Load History
+	async function loadHistory() {
+		try {
+			const response = await fetch(`${API_URL}/api/history`);
+			if (!response.ok) throw new Error('Failed to fetch');
+			const data = await response.json();
+			
+			if (data.length === 0) {
+				historyContainer.innerHTML = '<p class="text-center text-[#BBAFAB] text-sm italic">The archives are empty. Begin a new reading.</p>';
+				return;
+			}
+
+			historyContainer.innerHTML = data.map(match => `
+				<div class="flex items-center justify-between py-3 border-b border-[#E8DBD3]/50 last:border-0 hover:bg-white/30 transition-colors px-4 rounded-lg">
+					<div class="flex flex-col">
+						<span class="text-base font-['Crimson_Pro'] text-[#4A3B32]">${match.name1} & ${match.name2}</span>
+						<span class="text-[11px] uppercase tracking-wider text-[#A69992] mt-1">${match.zodiac1} and ${match.zodiac2}</span>
+					</div>
+					<div class="flex flex-col items-end">
+						<span class="text-2xl font-light font-['Crimson_Pro'] text-[#8C6B5D]">${match.percentage}%</span>
+					</div>
+				</div>
+			`).join('');
+		} catch (error) {
+			console.error(error);
+			historyContainer.innerHTML = '<p class="text-center text-[#D4B5A5] text-sm italic">Could not reach the archives.</p>';
+		}
+	}
+
+	// Calculate Match
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		
+		const formData = new FormData(e.target);
+		const payload = {
+			name1: formData.get('name1'),
+			gender1: formData.get('gender1'),
+			zodiac1: formData.get('zodiac1'),
+			name2: formData.get('name2'),
+			gender2: formData.get('gender2'),
+			zodiac2: formData.get('zodiac2')
+		};
+
+		const submitBtn = form.querySelector('button[type="submit"]');
+		const btnText = submitBtn.querySelector('span');
+		const originalHTML = btnText.innerHTML;
+		submitBtn.disabled = true;
+		btnText.innerHTML = '<span class="animate-pulse">Reading the stars...</span>';
+
+		try {
+			const response = await fetch(`${API_URL}/api/calculate`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload)
+			});
+			
+			if (!response.ok) throw new Error('Failed to calculate');
+			const data = await response.json();
+
+			// Animate UI state
+			resultContainer.classList.remove('hidden');
+			resultContainer.classList.add('flex');
+			// Allow DOM to update before applying opacity
+			setTimeout(() => {
+				resultContainer.classList.remove('opacity-0');
+				resultContainer.classList.add('opacity-100');
+			}, 50);
+			
+			let currentPct = 0;
+			const targetPct = data.percentage;
+			const duration = 2000;
+			const stepTime = 16;
+			const steps = duration / stepTime;
+			const increment = targetPct / steps;
+
+			const timer = setInterval(() => {
+				currentPct += increment;
+				if (currentPct >= targetPct) {
+					currentPct = targetPct;
+					clearInterval(timer);
+					loadHistory();
+				}
+				resultPercentage.innerText = Math.floor(currentPct).toString();
+			}, stepTime);
+
+			// Segmentations without emojis
+			if (targetPct >= 95) {
+				resultMessage.innerText = "True Soulmates. A rare celestial alignment.";
+			} else if (targetPct >= 85) {
+				resultMessage.innerText = "Deeply Connected. A beautiful harmony.";
+			} else if (targetPct >= 70) {
+				resultMessage.innerText = "Strong Resonance. A very promising bond.";
+			} else if (targetPct >= 50) {
+				resultMessage.innerText = "Intriguing Dynamic. Room to grow together.";
+			} else if (targetPct >= 30) {
+				resultMessage.innerText = "Challenging Energies. Requires mutual understanding.";
+			} else {
+				resultMessage.innerText = "Opposing Forces. Best kept as platonic acquaintances.";
+			}
+
+		} catch (error) {
+			console.error(error);
+			alert('Connection error. Please ensure the celestial engine is running.');
+		} finally {
+			submitBtn.disabled = false;
+			btnText.innerHTML = originalHTML;
+		}
+	});
+
+	// Initial load
+	loadHistory();
+</script>
