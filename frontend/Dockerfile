@@ -4,8 +4,8 @@ WORKDIR /app
 
 RUN corepack enable pnpm
 
-COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* ./
-RUN pnpm install
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --ignore-scripts && pnpm rebuild esbuild sharp
 
 COPY . .
 

@@ -12,10 +12,42 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
-      
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
+          
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Create ECR repositories if they do not exist
+        run: |
+          aws ecr describe-repositories --repository-names lovematch-backend || aws ecr create-repository --repository-name lovematch-backend
+          aws ecr describe-repositories --repository-names lovematch-frontend || aws ecr create-repository --repository-name lovematch-frontend
+
+      - name: Build and push backend Docker image
+        run: |
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/lovematch-backend:${{ github.sha }} ./backend
+          docker push ${{ steps.login-ecr.outputs.registry }}/lovematch-backend:${{ github.sha }}
+
+      - name: Build and push frontend Docker image
+        run: |
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/lovematch-frontend:${{ github.sha }} ./frontend
+          docker push ${{ steps.login-ecr.outputs.registry }}/lovematch-frontend:${{ github.sha }}
+
+      - name: Compile docker-compose.yml
+        run: |
+          sed -e "s|BACKEND_IMAGE|${{ steps.login-ecr.outputs.registry }}/lovematch-backend:${{ github.sha }}|g" \
+              -e "s|FRONTEND_IMAGE|${{ steps.login-ecr.outputs.registry }}/lovematch-frontend:${{ github.sha }}|g" \
+              docker-compose.template.yml > docker-compose.yml
+
       - name: Generate Deployment Package
         run: |
-          zip -r deploy.zip . -x '*.git*' -x '*/node_modules/*' -x '*/dist/*'
+          zip -r deploy.zip docker-compose.yml
           
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
