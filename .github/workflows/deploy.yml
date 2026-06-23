@@ -6,8 +6,34 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Run Backend Tests
+        working-directory: ./backend
+        run: pnpm test
+
   deploy:
     runs-on: ubuntu-latest
+    needs: test
+
     
     steps:
       - name: Checkout Source Code
